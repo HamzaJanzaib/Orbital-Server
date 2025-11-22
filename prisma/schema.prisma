@@ -1,0 +1,27 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Test {
+  id         String     @id @default(uuid())
+  title      String
+  description String?
+  status     TestStatus @default(PENDING)
+  result     Json?
+  durationMs Int?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+enum TestStatus {
+  PENDING
+  RUNNING
+  PASSED
+  FAILED
+}
